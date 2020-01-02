@@ -1,6 +1,8 @@
 package club.service.impl;
 
+import club.dao.RoleDao;
 import club.dao.UserDao;
+import club.pojo.Role;
 import club.pojo.User;
 import club.service.UserService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -18,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private RoleDao roleDao;
 
     @Override
     public User login(String name, String password) {
@@ -37,6 +42,15 @@ public class UserServiceImpl implements UserService {
         if(queryname != null && !queryname.equals("")) wrapper.like("userName", queryname);
         if(queryUserRole != null && queryUserRole != 0) wrapper.eq("userRole", queryUserRole);
         List<User> userList = userDao.selectPage(page, wrapper);
+        List<Role> roleList = roleDao.allRole();
+        for (User user : userList){
+            for (Role role : roleList){
+                if (user.getUserrole() == role.getId()){
+                    user.setRole(role);
+                    break;
+                }
+            }
+        }
         page.setRecords(userList);
         return page;
     }
