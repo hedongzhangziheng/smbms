@@ -1,4 +1,4 @@
-package club.vo;
+package club.pojo.vo;
 
 import lombok.Data;
 

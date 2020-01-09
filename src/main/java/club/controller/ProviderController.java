@@ -1,10 +1,9 @@
 package club.controller;
 
-import club.pojo.Bill;
 import club.pojo.Provider;
 import club.service.BillService;
 import club.service.ProviderService;
-import club.vo.Result;
+import club.pojo.vo.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
